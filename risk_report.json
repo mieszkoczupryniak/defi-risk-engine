@@ -1,0 +1,20 @@
+{
+  "wallet": "0xB55dD6FDc13985b3062c565B5214E986FD90Da59",
+  "timestamp": "2026-03-01T13:27:42.512460+00:00",
+  "scores": {
+    "CR": 10.0,
+    "PR": 10.0,
+    "CoR": 100.0,
+    "ChR": 25.0,
+    "portfolio_risk": 34.75
+  },
+  "risk_label": "\ud83d\udfe1 MEDIUM",
+  "tokens": [
+    {
+      "symbol": "ETH",
+      "chain": "arbitrum",
+      "value_usd": 0.4884,
+      "percent": 100.0
+    }
+  ]
+}
