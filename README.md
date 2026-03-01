@@ -18,3 +18,10 @@ Calculates CR, PR, CoR, ChR components and outputs a composite Portfolio Risk Sc
 ```bash
 pip install requests python-dotenv
 python main.py
+```
+
+## Output
+Generates `risk_report.json` with full breakdown per token and final Portfolio Risk Score.
+
+## Status
+🚧 MVP v0.1 – active development
