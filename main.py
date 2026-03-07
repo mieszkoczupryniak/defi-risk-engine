@@ -5,10 +5,16 @@ from dotenv import load_dotenv
 load_dotenv()
 
 REGISTRY = {
-    "ETH":     {"risk_level": 10},
-    "USDC":    {"risk_level": 25},
-    "WBTC":    {"risk_level": 20},
-    "ARB":     {"risk_level": 40},
+    "ETH":   {"risk_level": 10},
+    "WETH":  {"risk_level": 10},
+    "WBTC":  {"risk_level": 20},
+    "USDC":  {"risk_level": 25},
+    "USDT":  {"risk_level": 30},
+    "DAI":   {"risk_level": 20},
+    "ARB":   {"risk_level": 40},
+    "OP":    {"risk_level": 40},
+    "MATIC": {"risk_level": 40},
+    "CRV":   {"risk_level": 45},
     "DEFAULT": {"risk_level": 50},
 }
 
@@ -20,15 +26,16 @@ CHAIN_RISK = {
     "bsc":      45,
 }
 
-WALLET = "0xB55dD6FDc13985b3062c565B5214E986FD90Da59"
+WALLET = "0x6cd68e8f04490cd1a5a21cc97cc8bc15b47dc9eb"
 headers = {"X-SIM-API-Key": os.getenv("SIM_API_KEY")}
 
 response = requests.get(
-    f"https://api.sim.dune.com/v1/evm/balances/{WALLET}?chain_ids=1,42161",
+    f"https://api.sim.dune.com/v1/evm/balances/{WALLET}?chain_ids=1,42161,10,137",
     headers=headers
 ).json()
 
 balances = response["balances"]
+balances = [t for t in balances if t.get("value_usd") is not None]
 total = sum(t["value_usd"] for t in balances)
 
 CR = PR = CoR = ChR = 0.0
