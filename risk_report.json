@@ -1,10 +1,10 @@
 {
   "wallet": "0x6cd68e8f04490cd1a5a21cc97cc8bc15b47dc9eb",
-  "timestamp": "2026-03-08T17:04:55.769373+00:00",
+  "timestamp": "2026-03-08T17:14:41.794061+00:00",
   "scores": {
     "CR": 25.51,
     "PR": 25.51,
-    "CoR": 68.03,
+    "CoR": 68.02,
     "ChR": 10.21,
     "portfolio_risk": 33.84,
     "defi_risk": 0.0,
@@ -15,103 +15,103 @@
     {
       "symbol": "ETH",
       "chain": "ethereum",
-      "value_usd": 1947.1653,
-      "percent": 68.03
+      "value_usd": 1944.6995,
+      "percent": 68.02
     },
     {
       "symbol": "TREE",
       "chain": "ethereum",
       "value_usd": 306.7808,
-      "percent": 10.72
+      "percent": 10.73
     },
     {
       "symbol": "3CRV",
       "chain": "ethereum",
       "value_usd": 156.4283,
-      "percent": 5.46
+      "percent": 5.47
     },
     {
       "symbol": "SHFL",
       "chain": "ethereum",
-      "value_usd": 143.1155,
-      "percent": 5.0
+      "value_usd": 142.6112,
+      "percent": 4.99
     },
     {
       "symbol": "DJIA",
       "chain": "ethereum",
-      "value_usd": 76.9435,
+      "value_usd": 76.846,
       "percent": 2.69
     },
     {
       "symbol": "SYRUP",
       "chain": "ethereum",
-      "value_usd": 63.8973,
+      "value_usd": 63.8142,
       "percent": 2.23
     },
     {
       "symbol": "ETH",
       "chain": "optimism",
-      "value_usd": 33.0762,
+      "value_usd": 33.0343,
       "percent": 1.16
     },
     {
       "symbol": "GBR",
       "chain": "ethereum",
-      "value_usd": 27.7091,
+      "value_usd": 27.674,
       "percent": 0.97
     },
     {
       "symbol": "PEANUT",
       "chain": "ethereum",
-      "value_usd": 23.53,
+      "value_usd": 23.5002,
       "percent": 0.82
     },
     {
       "symbol": "SHINSHU",
       "chain": "ethereum",
-      "value_usd": 15.2826,
+      "value_usd": 15.2632,
       "percent": 0.53
     },
     {
       "symbol": "SUSD",
       "chain": "ethereum",
-      "value_usd": 12.7539,
+      "value_usd": 12.7377,
       "percent": 0.45
     },
     {
       "symbol": "REMILIA",
       "chain": "ethereum",
-      "value_usd": 9.2558,
+      "value_usd": 9.2441,
       "percent": 0.32
     },
     {
       "symbol": "TISM",
       "chain": "ethereum",
-      "value_usd": 8.9586,
+      "value_usd": 8.9473,
       "percent": 0.31
     },
     {
       "symbol": "GME",
       "chain": "ethereum",
-      "value_usd": 7.5764,
+      "value_usd": 7.5668,
       "percent": 0.26
     },
     {
       "symbol": "DOGENES",
       "chain": "ethereum",
-      "value_usd": 7.2098,
+      "value_usd": 7.2006,
       "percent": 0.25
-    },
-    {
-      "symbol": "ETH",
-      "chain": "arbitrum",
-      "value_usd": 6.5018,
-      "percent": 0.23
     },
     {
       "symbol": "PERQ",
       "chain": "ethereum",
       "value_usd": 6.4938,
+      "percent": 0.23
+    },
+    {
+      "symbol": "ETH",
+      "chain": "arbitrum",
+      "value_usd": 6.4843,
       "percent": 0.23
     },
     {
@@ -129,19 +129,19 @@
     {
       "symbol": "BYN",
       "chain": "ethereum",
-      "value_usd": 2.0657,
+      "value_usd": 2.0631,
       "percent": 0.07
     },
     {
       "symbol": "PLUG",
       "chain": "ethereum",
-      "value_usd": 1.3357,
+      "value_usd": 1.334,
       "percent": 0.05
     },
     {
       "symbol": "AUSD",
       "chain": "ethereum",
-      "value_usd": 1.0156,
+      "value_usd": 1.0178,
       "percent": 0.04
     },
     {
@@ -153,7 +153,7 @@
     {
       "symbol": "POG",
       "chain": "ethereum",
-      "value_usd": 0.3752,
+      "value_usd": 0.3747,
       "percent": 0.01
     },
     {
@@ -165,7 +165,7 @@
     {
       "symbol": "ALTD",
       "chain": "ethereum",
-      "value_usd": 0.0215,
+      "value_usd": 0.0214,
       "percent": 0.0
     },
     {
