@@ -13,6 +13,14 @@ POSITION_RISK = {
     "DEFAULT":   {"risk_level": 60, "label": "Unknown"},
 }
 
+SPAM_BLACKLIST = {
+    "feusdh", "feusdh2", "vousd", "fusdc", "fusdt",
+    "fdai", "fusd", "feth", "xtoken", "reward",
+}
+
+MAX_SINGLE_POSITION_USD = 500_000
+
+
 def get_defi_positions(wallet: str, headers: dict) -> dict:
     response = requests.get(
         f"https://api.sim.dune.com/beta/evm/defi/positions/{wallet}",
@@ -20,14 +28,19 @@ def get_defi_positions(wallet: str, headers: dict) -> dict:
     ).json()
 
     positions = response.get("positions", [])
-    positions = [p for p in positions if (p.get("usd_value") or 0) > 0]
+    positions = [
+        p for p in positions
+        if (p.get("usd_value") or 0) > 0
+        and (p.get("usd_value") or 0) <= MAX_SINGLE_POSITION_USD
+        and (p.get("token_symbol") or "").lower() not in SPAM_BLACKLIST
+    ]
 
     total_usd = sum(p.get("usd_value", 0) or 0 for p in positions)
 
     result = {
         "total_usd": total_usd,
         "positions": [],
-        "DR_score": 0.0  # DeFi Risk score
+        "DR_score": 0.0
     }
 
     if total_usd == 0:
@@ -36,10 +49,10 @@ def get_defi_positions(wallet: str, headers: dict) -> dict:
     DR_total = 0.0
 
     for pos in positions:
-        pos_type   = pos.get("type", "DEFAULT")
-        usd_value  = pos.get("usd_value", 0) or 0
-        pct        = usd_value / total_usd
-        info       = POSITION_RISK.get(pos_type, POSITION_RISK["DEFAULT"])
+        pos_type  = pos.get("type", "DEFAULT")
+        usd_value = pos.get("usd_value", 0) or 0
+        pct       = usd_value / total_usd
+        info      = POSITION_RISK.get(pos_type, POSITION_RISK["DEFAULT"])
 
         token0 = pos.get("token0_symbol", "?")
         token1 = pos.get("token1_symbol", "?")

@@ -1,20 +1,292 @@
 {
-  "wallet": "0xB55dD6FDc13985b3062c565B5214E986FD90Da59",
-  "timestamp": "2026-03-01T13:27:42.512460+00:00",
+  "wallet": "0x6cd68e8f04490cd1a5a21cc97cc8bc15b47dc9eb",
+  "timestamp": "2026-03-08T17:04:55.769373+00:00",
   "scores": {
-    "CR": 10.0,
-    "PR": 10.0,
-    "CoR": 100.0,
-    "ChR": 25.0,
-    "portfolio_risk": 34.75
+    "CR": 25.51,
+    "PR": 25.51,
+    "CoR": 68.03,
+    "ChR": 10.21,
+    "portfolio_risk": 33.84,
+    "defi_risk": 0.0,
+    "unified_risk": 33.84
   },
   "risk_label": "\ud83d\udfe1 MEDIUM",
   "tokens": [
     {
       "symbol": "ETH",
+      "chain": "ethereum",
+      "value_usd": 1947.1653,
+      "percent": 68.03
+    },
+    {
+      "symbol": "TREE",
+      "chain": "ethereum",
+      "value_usd": 306.7808,
+      "percent": 10.72
+    },
+    {
+      "symbol": "3CRV",
+      "chain": "ethereum",
+      "value_usd": 156.4283,
+      "percent": 5.46
+    },
+    {
+      "symbol": "SHFL",
+      "chain": "ethereum",
+      "value_usd": 143.1155,
+      "percent": 5.0
+    },
+    {
+      "symbol": "DJIA",
+      "chain": "ethereum",
+      "value_usd": 76.9435,
+      "percent": 2.69
+    },
+    {
+      "symbol": "SYRUP",
+      "chain": "ethereum",
+      "value_usd": 63.8973,
+      "percent": 2.23
+    },
+    {
+      "symbol": "ETH",
+      "chain": "optimism",
+      "value_usd": 33.0762,
+      "percent": 1.16
+    },
+    {
+      "symbol": "GBR",
+      "chain": "ethereum",
+      "value_usd": 27.7091,
+      "percent": 0.97
+    },
+    {
+      "symbol": "PEANUT",
+      "chain": "ethereum",
+      "value_usd": 23.53,
+      "percent": 0.82
+    },
+    {
+      "symbol": "SHINSHU",
+      "chain": "ethereum",
+      "value_usd": 15.2826,
+      "percent": 0.53
+    },
+    {
+      "symbol": "SUSD",
+      "chain": "ethereum",
+      "value_usd": 12.7539,
+      "percent": 0.45
+    },
+    {
+      "symbol": "REMILIA",
+      "chain": "ethereum",
+      "value_usd": 9.2558,
+      "percent": 0.32
+    },
+    {
+      "symbol": "TISM",
+      "chain": "ethereum",
+      "value_usd": 8.9586,
+      "percent": 0.31
+    },
+    {
+      "symbol": "GME",
+      "chain": "ethereum",
+      "value_usd": 7.5764,
+      "percent": 0.26
+    },
+    {
+      "symbol": "DOGENES",
+      "chain": "ethereum",
+      "value_usd": 7.2098,
+      "percent": 0.25
+    },
+    {
+      "symbol": "ETH",
       "chain": "arbitrum",
-      "value_usd": 0.4884,
-      "percent": 100.0
+      "value_usd": 6.5018,
+      "percent": 0.23
+    },
+    {
+      "symbol": "PERQ",
+      "chain": "ethereum",
+      "value_usd": 6.4938,
+      "percent": 0.23
+    },
+    {
+      "symbol": "$GARBAGE",
+      "chain": "ethereum",
+      "value_usd": 2.23,
+      "percent": 0.08
+    },
+    {
+      "symbol": "DEFI",
+      "chain": "ethereum",
+      "value_usd": 2.2067,
+      "percent": 0.08
+    },
+    {
+      "symbol": "BYN",
+      "chain": "ethereum",
+      "value_usd": 2.0657,
+      "percent": 0.07
+    },
+    {
+      "symbol": "PLUG",
+      "chain": "ethereum",
+      "value_usd": 1.3357,
+      "percent": 0.05
+    },
+    {
+      "symbol": "AUSD",
+      "chain": "ethereum",
+      "value_usd": 1.0156,
+      "percent": 0.04
+    },
+    {
+      "symbol": "MKUSD",
+      "chain": "ethereum",
+      "value_usd": 0.4093,
+      "percent": 0.01
+    },
+    {
+      "symbol": "POG",
+      "chain": "ethereum",
+      "value_usd": 0.3752,
+      "percent": 0.01
+    },
+    {
+      "symbol": "APU",
+      "chain": "ethereum",
+      "value_usd": 0.0317,
+      "percent": 0.0
+    },
+    {
+      "symbol": "ALTD",
+      "chain": "ethereum",
+      "value_usd": 0.0215,
+      "percent": 0.0
+    },
+    {
+      "symbol": "BACON",
+      "chain": "ethereum",
+      "value_usd": 0.0153,
+      "percent": 0.0
+    },
+    {
+      "symbol": "YIELD",
+      "chain": "ethereum",
+      "value_usd": 0.0094,
+      "percent": 0.0
+    },
+    {
+      "symbol": "DIGG",
+      "chain": "ethereum",
+      "value_usd": 0.0076,
+      "percent": 0.0
+    },
+    {
+      "symbol": "TEMPLE",
+      "chain": "ethereum",
+      "value_usd": 0.0045,
+      "percent": 0.0
+    },
+    {
+      "symbol": "POL",
+      "chain": "polygon",
+      "value_usd": 0.0039,
+      "percent": 0.0
+    },
+    {
+      "symbol": "GRG",
+      "chain": "ethereum",
+      "value_usd": 0.0021,
+      "percent": 0.0
+    },
+    {
+      "symbol": "DESCI",
+      "chain": "ethereum",
+      "value_usd": 0.0016,
+      "percent": 0.0
+    },
+    {
+      "symbol": "SUPERDOG",
+      "chain": "ethereum",
+      "value_usd": 0.0007,
+      "percent": 0.0
+    },
+    {
+      "symbol": "DMND",
+      "chain": "ethereum",
+      "value_usd": 0.0005,
+      "percent": 0.0
+    },
+    {
+      "symbol": "$BASED",
+      "chain": "ethereum",
+      "value_usd": 0.0004,
+      "percent": 0.0
+    },
+    {
+      "symbol": "BABYRFD",
+      "chain": "ethereum",
+      "value_usd": 0.0001,
+      "percent": 0.0
+    },
+    {
+      "symbol": "USDN",
+      "chain": "ethereum",
+      "value_usd": 0.0001,
+      "percent": 0.0
+    },
+    {
+      "symbol": "DOGE",
+      "chain": "ethereum",
+      "value_usd": 0.0,
+      "percent": 0.0
+    },
+    {
+      "symbol": "YRISE",
+      "chain": "ethereum",
+      "value_usd": 0.0,
+      "percent": 0.0
+    },
+    {
+      "symbol": "HEGIC",
+      "chain": "ethereum",
+      "value_usd": 0.0,
+      "percent": 0.0
+    },
+    {
+      "symbol": "YYDAI+YUSDC+YUSDT+YTUSD",
+      "chain": "ethereum",
+      "value_usd": 0.0,
+      "percent": 0.0
+    },
+    {
+      "symbol": "AU21",
+      "chain": "ethereum",
+      "value_usd": 0.0,
+      "percent": 0.0
+    },
+    {
+      "symbol": "BUSD0",
+      "chain": "ethereum",
+      "value_usd": 0.0,
+      "percent": 0.0
+    },
+    {
+      "symbol": "DAI",
+      "chain": "ethereum",
+      "value_usd": 0.0,
+      "percent": 0.0
+    },
+    {
+      "symbol": "SBTC",
+      "chain": "ethereum",
+      "value_usd": 0.0,
+      "percent": 0.0
     }
   ]
 }
