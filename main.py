@@ -135,7 +135,18 @@ for token in balances:
         "percent": round((token["value_usd"] / total) * 100, 2)
     })
 
+import os
+
+# Save latest report
 with open("risk_report.json", "w") as f:
     json.dump(report, f, indent=2)
 
+# Save historical report
+os.makedirs("reports", exist_ok=True)
+timestamp_slug = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H-%M-%S")
+history_filename = f"reports/{timestamp_slug}_{WALLET[:8]}.json"
+with open(history_filename, "w") as f:
+    json.dump(report, f, indent=2)
+
 print(f"\n✅ Report saved → risk_report.json")
+print(f"📁 History saved → {history_filename}")
