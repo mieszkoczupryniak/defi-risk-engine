@@ -1,47 +1,41 @@
 import requests
 import os
+import json
+from datetime import datetime, timezone
 from dotenv import load_dotenv
 from defi_positions import get_defi_positions
-
 
 load_dotenv()
 
 REGISTRY = {
-    # Blue chip
-    "ETH":    {"risk_level": 10},
-    "WETH":   {"risk_level": 10},
-    "WBTC":   {"risk_level": 20},
-    # Stablecoins
-    "USDC":   {"risk_level": 15},
-    "USDT":   {"risk_level": 20},
-    "DAI":    {"risk_level": 15},
-    "SUSD":   {"risk_level": 25},
-    "AUSD":   {"risk_level": 25},
-    "MKUSD":  {"risk_level": 20},
-    # DeFi blue chip
-    "CRV":    {"risk_level": 45},
-    "3CRV":   {"risk_level": 35},
-    "ARB":    {"risk_level": 40},
-    "OP":     {"risk_level": 40},
-    "MATIC":  {"risk_level": 40},
-    "SYRUP":  {"risk_level": 50},
-    "PERQ":   {"risk_level": 55},
-    # Mid risk
-    "SHFL":   {"risk_level": 65},
-    "DJIA":   {"risk_level": 60},
-    "GBR":    {"risk_level": 70},
-    "TREE":   {"risk_level": 70},
-    # High risk / meme
+    "ETH":     {"risk_level": 10},
+    "WETH":    {"risk_level": 10},
+    "WBTC":    {"risk_level": 20},
+    "USDC":    {"risk_level": 15},
+    "USDT":    {"risk_level": 20},
+    "DAI":     {"risk_level": 15},
+    "SUSD":    {"risk_level": 25},
+    "AUSD":    {"risk_level": 25},
+    "MKUSD":   {"risk_level": 20},
+    "CRV":     {"risk_level": 45},
+    "3CRV":    {"risk_level": 35},
+    "ARB":     {"risk_level": 40},
+    "OP":      {"risk_level": 40},
+    "MATIC":   {"risk_level": 40},
+    "SYRUP":   {"risk_level": 50},
+    "PERQ":    {"risk_level": 55},
+    "SHFL":    {"risk_level": 65},
+    "DJIA":    {"risk_level": 60},
+    "GBR":     {"risk_level": 70},
+    "TREE":    {"risk_level": 70},
     "PEANUT":  {"risk_level": 80},
     "GME":     {"risk_level": 85},
     "DOGENES": {"risk_level": 85},
     "REMILIA": {"risk_level": 80},
     "TISM":    {"risk_level": 80},
     "SHINSHU": {"risk_level": 80},
-    # Default fallback
     "DEFAULT": {"risk_level": 75},
 }
-
 
 CHAIN_RISK = {
     "ethereum": 10,
@@ -51,9 +45,21 @@ CHAIN_RISK = {
     "bsc":      45,
 }
 
+def load_last_report(wallet: str) -> dict | None:
+    if not os.path.exists("reports"):
+        return None
+    slug = wallet[:8]
+    files = sorted([f for f in os.listdir("reports") if slug in f])
+    if len(files) < 2:
+        return None
+    with open(f"reports/{files[-2]}") as f:  # -2 bo -1 to właśnie zapisany
+        return json.load(f)
+
 WALLET = "0x6cd68e8f04490cd1a5a21cc97cc8bc15b47dc9eb"
-headers = {"X-SIM-API-Key": os.getenv("SIM_API_KEY")}
+headers     = {"X-SIM-API-Key": os.getenv("SIM_API_KEY")}
 headers_sim = {"X-Sim-Api-Key": os.getenv("SIM_API_KEY")}
+
+last_report = load_last_report(WALLET)
 
 response = requests.get(
     f"https://api.sim.dune.com/v1/evm/balances/{WALLET}?chain_ids=1,42161,10,137",
@@ -86,12 +92,11 @@ print(f"PR:  {round(PR,2)}")
 print(f"CoR: {round(CoR,2)}")
 print(f"ChR: {round(ChR,2)}")
 print(f"==> Portfolio Risk Score: {round(portfolio_risk,2)}")
-# === DEFI POSITIONS (LP / Lending / Vaults) ===
+
 print("\n--- DeFi Positions ---")
 defi = get_defi_positions(WALLET, headers_sim)
-DR = defi["DR_score"]
+DR   = defi["DR_score"]
 
-# === UNIFIED SCORE v0.2 ===
 if defi["total_usd"] > 0:
     token_weight = total / (total + defi["total_usd"])
     defi_weight  = defi["total_usd"] / (total + defi["total_usd"])
@@ -105,10 +110,23 @@ print(f"DeFi Positions Risk:   {DR}")
 print(f"==> UNIFIED RISK v0.2: {unified_risk}")
 print(f"{'='*40}")
 
+# === TREND ===
+if last_report:
+    prev = last_report["scores"]
+    def delta(key, curr):
+        d = round(curr - prev.get(key, curr), 2)
+        arrow = "▲" if d > 0 else "▼" if d < 0 else "="
+        return f"{arrow} {abs(d)}"
 
-import json
-from datetime import datetime, timezone
+    print(f"\n--- Trend vs last scan ({last_report['timestamp'][:16]}) ---")
+    print(f"Unified Risk: {unified_risk}  ({delta('unified_risk', unified_risk)})")
+    print(f"CR:           {round(CR,2)}  ({delta('CR', round(CR,2))})")
+    print(f"CoR:          {round(CoR,2)}  ({delta('CoR', round(CoR,2))})")
+    print(f"ChR:          {round(ChR,2)}  ({delta('ChR', round(ChR,2))})")
+else:
+    print("\n--- Trend: brak poprzedniego raportu ---")
 
+# === SAVE ===
 report = {
     "wallet": WALLET,
     "timestamp": datetime.now(timezone.utc).isoformat(),
@@ -118,35 +136,29 @@ report = {
         "CoR": round(CoR, 2),
         "ChR": round(ChR, 2),
         "portfolio_risk": round(portfolio_risk, 2),
-        "defi_risk": DR if 'DR' in dir() else 0,
-        "unified_risk": unified_risk if 'unified_risk' in dir() else round(portfolio_risk, 2)
-
+        "defi_risk": DR,
+        "unified_risk": unified_risk,
     },
     "risk_label": "🟢 LOW" if portfolio_risk < 30 else "🟡 MEDIUM" if portfolio_risk < 60 else "🔴 HIGH",
-    "tokens": []
+    "tokens": [
+        {
+            "symbol": (t.get("symbol") or "DEFAULT").upper(),
+            "chain":  t.get("chain", "unknown"),
+            "value_usd": round(t["value_usd"], 4),
+            "percent":   round((t["value_usd"] / total) * 100, 2),
+        }
+        for t in balances
+    ],
 }
 
-for token in balances:
-    sym = (token.get("symbol") or "DEFAULT").upper()
-    report["tokens"].append({
-        "symbol": sym,
-        "chain": token.get("chain", "unknown"),
-        "value_usd": round(token["value_usd"], 4),
-        "percent": round((token["value_usd"] / total) * 100, 2)
-    })
-
-import os
-
-# Save latest report
 with open("risk_report.json", "w") as f:
     json.dump(report, f, indent=2)
 
-# Save historical report
 os.makedirs("reports", exist_ok=True)
-timestamp_slug = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H-%M-%S")
-history_filename = f"reports/{timestamp_slug}_{WALLET[:8]}.json"
-with open(history_filename, "w") as f:
+slug = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H-%M-%S")
+history_path = f"reports/{slug}_{WALLET[:8]}.json"
+with open(history_path, "w") as f:
     json.dump(report, f, indent=2)
 
 print(f"\n✅ Report saved → risk_report.json")
-print(f"📁 History saved → {history_filename}")
+print(f"📁 History saved → {history_path}")
