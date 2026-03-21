@@ -4,6 +4,7 @@ import json
 from datetime import datetime, timezone
 from dotenv import load_dotenv
 from defi_positions import get_defi_positions
+from alerts import check_alerts
 
 load_dotenv()
 
@@ -52,7 +53,7 @@ def load_last_report(wallet: str) -> dict | None:
     files = sorted([f for f in os.listdir("reports") if slug in f])
     if len(files) < 2:
         return None
-    with open(f"reports/{files[-2]}") as f:  # -2 bo -1 to właśnie zapisany
+    with open(f"reports/{files[-2]}") as f:
         return json.load(f)
 
 WALLET = "0x6cd68e8f04490cd1a5a21cc97cc8bc15b47dc9eb"
@@ -126,6 +127,23 @@ if last_report:
 else:
     print("\n--- Trend: brak poprzedniego raportu ---")
 
+# === ALERTS ===
+alert_tokens = [
+    {
+        "symbol":  (t.get("symbol") or "DEFAULT").upper(),
+        "percent": round((t["value_usd"] / total) * 100, 2),
+    }
+    for t in balances
+]
+alerts = check_alerts(unified_risk, last_report, alert_tokens)
+
+print("\n--- Alerts ---")
+if alerts:
+    for a in alerts:
+        print(a)
+else:
+    print("✅ No critical alerts detected.")
+
 # === SAVE ===
 report = {
     "wallet": WALLET,
@@ -140,6 +158,7 @@ report = {
         "unified_risk": unified_risk,
     },
     "risk_label": "🟢 LOW" if portfolio_risk < 30 else "🟡 MEDIUM" if portfolio_risk < 60 else "🔴 HIGH",
+    "alerts": alerts,
     "tokens": [
         {
             "symbol": (t.get("symbol") or "DEFAULT").upper(),
