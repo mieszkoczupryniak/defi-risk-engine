@@ -80,7 +80,7 @@ python main.py --wallet 0xYOUR_WALLET
 - [x] v0.5 — CLI flags
 - [x] v0.6 — trend tracking
 - [x] v0.7 — risk alerts
-- [ ] v0.8 — multi-wallet scanning
+- [x] v0.8 — multi-wallet scanning
 - [ ] v1.0 — REST API
 
 ---
